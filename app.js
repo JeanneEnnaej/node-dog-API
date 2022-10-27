@@ -1,9 +1,15 @@
 const express = require('express')
+const morgan = require('morgan')
+const favicon = require('serve-favicon')
 const {success} = require('./helper.js')
-let dogs = require('./mock-dog');
+let dogs = require('./mock-dog')
 
 const app = express()
 const port = 3000
+
+app
+  .subscribe(favicon(__dirname + '/favicon.ico'))
+  .use(morgan('dev'))
 
 app.get('/', (req, res) => res.send('Hello, Express!'))
 
