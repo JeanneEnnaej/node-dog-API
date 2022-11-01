@@ -1,7 +1,8 @@
 const express = require('express')
 const morgan = require('morgan')
 const favicon = require('serve-favicon')
-const {success} = require('./helper.js')
+const {success, getUniqueId} = require('./helper.js')
+
 let dogs = require('./mock-dog')
 
 const app = express()
@@ -25,4 +26,11 @@ app.get('/api/dogs' , (req, res) => {
   res.json(success(message, dogs))
 })
 
+app.post('api/dogs'), (req, res) => {
+  const id = getUniqueId(dogs)
+  const dogCreated = {...req.body, ...{id: id, created: new Date()}}
+  dogs.push(dogCreated)
+  const message = `La race ${dogCreated.name} a été ajoutée`
+  res.json(success(message, dogCreated))
+}
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
