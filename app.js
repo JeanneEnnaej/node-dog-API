@@ -46,5 +46,13 @@ app.put('/api/dogs/:id', (req,res) => {
     res.json(success(message, dogUpdated))
 })
 
+app.delete('/api/dogs/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const dogDeleted = dogs.find(dog => dog.id === id)
+  dogs.filter(dog => dog.id !== id)
+  const message = `La race ${dogDeleted.name} a bien été supprimée`
+  res.json(success(message, dogDeleted))
+})
+
 
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
