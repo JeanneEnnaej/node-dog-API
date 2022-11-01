@@ -59,7 +59,7 @@ const dogs = [
    hp: 12,
    cp: 5,
    picture: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/021.png",
-   types: ["Normal", "Vol"],
+   types: ["berger"],
    created: new Date()
   },
 
