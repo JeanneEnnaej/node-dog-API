@@ -32,8 +32,17 @@ sequelize.authenticate()
 const Dog = DogModel(sequelize, DataTypes)
 
 sequelize.sync({force: true})
-  .then(_ => console.log('La base de donnée "Dogslibrary" a bien été synchronisée'))
+  .then(_ => {
+    console.log('La base de donnée "Dogslibrary" a bien été synchronisée')
 
+    Dog.create({
+      name: 'Chihuahua',
+      hp: 20,
+      cp: 4,
+      picture: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png',
+      types: ["Compagnie"].join()
+    }).then(chihuahua => console.log(chihuahua.toJSON()))
+  })
 
 app
   .subscribe(favicon(__dirname + '/favicon.ico'))
