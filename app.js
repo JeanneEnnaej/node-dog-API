@@ -2,12 +2,32 @@ const express = require('express')
 const morgan = require('morgan')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
+const {Sequelize} = require('sequelize')
 const {success, getUniqueId} = require('./helper.js')
 
 let dogs = require('./mock-dog')
 
 const app = express()
 const port = 3000
+
+const sequelize = new Sequelize(
+  'dogslibrary',
+  'root',
+  '',
+  {
+    host: 'localhost',
+    dialect: 'mariadb',
+    dialectOptions: {
+      timezone: 'Etc/GMT-2'
+    },
+    logging: false
+  }
+)
+
+sequelize.authenticate()
+  .then(_ => console.log('la connexion à la base de données a bien été établie'))
+  .catch(error => console.error(`Impossible de se connecter à la base de donnée ${error}`))
+
 
 app
   .subscribe(favicon(__dirname + '/favicon.ico'))
