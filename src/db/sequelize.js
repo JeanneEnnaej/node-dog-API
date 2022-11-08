@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize')
 const DogModel = require('../models/dog')
 const dogs = require('./mock-dog')
 
-const sequelize = new Sequelize('doglibrary', 'root', '', {
+const sequelize = new Sequelize('dogslibrary', 'root', '', {
   host: 'localhost',
   dialect: 'mariadb',
   dialectOptions: {
@@ -11,17 +11,17 @@ const sequelize = new Sequelize('doglibrary', 'root', '', {
   logging: false
 })
 
-const dog = dogModel(sequelize, DataTypes)
+const Dog = DogModel(sequelize, DataTypes)
 
 const initDb = () => {
   return sequelize.sync({force: true}).then(_ => {
     dogs.map(dog => {
-      dog.create({
+      Dog.create({
         name: dog.name,
         hp: dog.hp,
         cp: dog.cp,
         picture: dog.picture,
-        types: dog.types.join()
+        types: dog.types
       }).then(dog => console.log(dog.toJSON()))
     })
     console.log('La base de donnée a bien été initialisée !')
