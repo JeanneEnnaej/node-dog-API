@@ -18,5 +18,7 @@ sequelize.initDb()
 require('./src/routes/findAllDogs')(app)
 require('./src/routes/findDogByPk')(app)
 require('./src/routes/createDog')(app)
+require('./src/routes/updateDog')(app)
+require('./src/routes/deleteDog')(app)
 
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
