@@ -21,4 +21,10 @@ require('./src/routes/createDog')(app)
 require('./src/routes/updateDog')(app)
 require('./src/routes/deleteDog')(app)
 
+// on ajoute la gestion des erreurs 404
+app.use(({res}) => {
+  const message = 'impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL'
+  res.status(404).json({message})
+})
+
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
