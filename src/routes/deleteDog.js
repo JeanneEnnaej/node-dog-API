@@ -4,7 +4,7 @@ module.exports = (app) => {
   app.delete('/api/dogs/:id', (req, res) => {
     Dog.findByPk(req.params.id).then(dog => {
       if (dog === null) {
-        const message = `La race demandée n'existe pas. Essayez un autre identifiant`;
+        const message = `La race demandée n'existe pas. Essayez un autre identifiant.`;
         return res.status(404).json({message})
       }
       const dogDeleted = dog;
